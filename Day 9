@@ -1,0 +1,76 @@
+//Backtracking Maze
+import java.util.*;
+public class MazePermutation {
+    public static void main(String[] args) {
+        System.out.println(mazefunc(3,3));
+    }
+    static int mazefunc(int r, int c){
+        if(r==1 || c ==1){
+            return 1;
+        }
+
+        int left = mazefunc(r-1,c);
+        int right = mazefunc(r,c-1);
+
+        return left+right;
+    }
+
+}
+
+//Maze Path List
+import java.util.ArrayList;
+
+public class MazeList {
+    public static void main(String[] args) {
+        System.out.println(path("",3,3));
+    }
+
+    static ArrayList<String > path(String p,int r, int c){
+        if(r==1 && c==1){
+            ArrayList<String> list = new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+
+        ArrayList<String > list = new ArrayList<>();
+
+        if (r > 1) {
+            list.addAll(path(p+'D',r-1,c));
+        }
+        if(c>1){
+            list.addAll(path(p+'R',r,c-1));
+        }
+        return list;
+    }
+}
+
+//Maze Diagonal
+
+import java.util.ArrayList;
+
+public class MazeDiagonal {
+    public static void main(String[] args) {
+        System.out.println(path("",3,3));
+    }
+
+    static ArrayList<String > path(String p, int r, int c){
+        if(r==1 && c==1){
+            ArrayList<String> list = new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+
+        ArrayList<String > list = new ArrayList<>();
+
+        if(r>1 && c>1){
+            list.addAll(path(p+'L',r-1,c-1));
+        }
+        if (r > 1) {
+            list.addAll(path(p+'D',r-1,c));
+        }
+        if(c>1){
+            list.addAll(path(p+'R',r,c-1));
+        }
+        return list;
+    }
+}
