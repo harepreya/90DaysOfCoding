@@ -1,0 +1,65 @@
+// Sort colors
+
+import java.util.Arrays;
+public class SortColors {
+    public static void main(String[] args) {
+        int arr[] = { 1,2,0,0,1,2,0,1};
+        sortColors(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+    static void sortColors(int[] nums) {
+        int l =0,m=0;
+        int h= nums.length-1;
+        while(m<=h){
+            if(nums[m]==0){
+                swap(nums,l,m);
+                l++;
+                m++;
+            }
+            else if(nums[m]==1){
+                m++;
+            }
+            else{
+                swap(nums,m,h);
+                h--;
+            }
+        }
+    }
+    public static void swap(int nums[],int n1, int n2){
+        int temp = nums[n1];
+        nums[n1] = nums[n2];
+        nums[n2] = temp;
+    }
+}
+
+// Majority element
+
+public class MajorityElement1 {
+    public static void main(String[] args) {
+        int arr[] ={7,5,7,5,7,5,5,5,5,3};
+        int res = majorityElement(arr);
+        System.out.println(res);
+    }
+    static int majorityElement(int[] nums) {
+        int c = 0;
+        int ele =0;
+        for(int i =0;i<nums.length;i++){
+            if(c == 0){
+                c=1;
+                ele = nums[i];
+            }
+            else if(nums[i] == ele)
+                c++;
+            else
+                c--;
+        }
+        int c1=0;
+        for(int i : nums){
+            if(i == ele)
+                c1++;
+        }
+        if(c1 > nums.length/2)
+            return ele;
+        return -1;
+    }
+}
