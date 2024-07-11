@@ -1,0 +1,46 @@
+// Rearrage array elements by sign 
+
+import java.util.Arrays;
+
+public class RearrangeArrays {
+    public static void main(String[] args) {
+        int arr[] ={3,-1,2,-4,9,-2};
+        int res[] = rearrangeArray(arr);
+        System.out.println(Arrays.toString(res));
+    }
+    static int[] rearrangeArray(int[] nums) {
+        int ans[] = new int[nums.length];
+        int p=0,n=1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<0){
+                ans[n]=nums[i];
+                n+=2;
+            }
+            else{
+                ans[p]=nums[i];
+                p+=2;
+            }
+        }
+        return ans;
+    }
+}
+
+
+// Best time to buy and sell on Stock
+
+public class BestBuySell1 {
+    public static void main(String[] args) {
+        int arr[] = { 7,2,1,4,6};
+        System.out.println(maxProfit(arr));
+    }
+    static int maxProfit(int[] prices) {
+        int min = prices[0];
+        int p =0;
+        for(int i =1;i<prices.length;i++){
+            int cost = prices[i]-min;
+            p = Math.max(p,cost);
+            min = Math.min(min,prices[i]);
+        }
+        return p;
+    }
+}
