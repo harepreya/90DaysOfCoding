@@ -1,0 +1,74 @@
+// Infix to Postfix
+
+import java.util.*;
+
+public class Main{
+    
+    char stack[]= new char[100];
+    int top = -1;
+    
+    void push(char x){
+        top++;
+        stack[top]=x;
+    }
+    
+    char pop(){
+        return stack[top--];
+    }
+    
+    char peek(){
+        return stack[top];
+    }
+    
+    int priority(char x){
+        if(x=='^')
+        return 3;
+        else if(x=='*'|| x=='/')
+        return 2;
+        else if(x=='+'||x=='-')
+        return 1;
+        else
+        return 0;
+    }
+    
+    public static void main(String args[]){
+        Scanner inp = new Scanner(System.in);
+        String str = inp.next();
+        char a[] = str.toCharArray();
+        Main m = new Main();
+        for(int i =0;i<a.length;i++){
+            if(Character.isAlphabetic(a[i]))
+                System.out.print(a[i]);
+            else if(a[i]=='(')
+            m.push(a[i]);
+            else if(a[i]==')'){
+                while(m.top!=-1 && m.peek()!='('){
+                    System.out.print(m.pop());
+                }
+                m.pop(); // to remove '(' from stack
+            }
+            else{
+                if(m.top==-1)
+                    m.push(a[i]);
+                else{
+                    if(m.priority(a[i])>m.priority(m.peek()))
+                        m.push(a[i]);
+                    else{
+                        while(m.top!=-1 && m.peek()!='('&& m.priority(a[i])<=m.priority(m.peek())){
+                            System.out.print(m.pop());
+                        }
+                    m.push(a[i]);
+                    }
+                }
+            }
+        }
+        
+            while(m.top!=-1){
+                System.out.print(m.pop());
+            }
+        
+    }
+}
+
+
+
